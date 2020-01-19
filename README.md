@@ -1,0 +1,1 @@
+# graphql-io-server-spring-boot-autoconfiguration

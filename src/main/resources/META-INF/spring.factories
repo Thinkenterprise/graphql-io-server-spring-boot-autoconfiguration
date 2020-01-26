@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.thinkenterprise.graphqlio.server.autoconfiguration.GsAutoConfiguration,\
+com.thinkenterprise.graphqlio.gts.autoconfiguration.GtsAutoConfiguration

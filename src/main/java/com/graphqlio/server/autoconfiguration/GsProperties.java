@@ -24,28 +24,42 @@
  * **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * *
  ******************************************************************************/
-package com.thinkenterprise.graphqlio;
+package com.graphqlio.server.autoconfiguration;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 
 /**
- * Interface for this library module
+ * Class to provide graphqlio.server Configuration properties 
  *
  * @author Michael Schäfer
- * @author Dr. Edgar Müller
  */
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE })
-@Documented
-@Import(GraphQLIOLibraryAutoConfiguration.class)
+
 @Configuration
-public @interface EnableGraphQLIOAutoconfiguration {
+@ConfigurationProperties(prefix = "graphqlio.server")
+public class GsProperties {
+
+    private String schemaLocationPattern;
+    
+    private String endpoint;
+
+    
+    public void setSchemaLocationPattern(String schemaLocationPattern) {
+        this.schemaLocationPattern=schemaLocationPattern;
+    }
+
+    public String getSchemaLocationPattern() {
+        return this.schemaLocationPattern;
+    }
+    
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    public void setEndpoint(String endpoint) {
+        this.endpoint=endpoint;
+    }
+
+
 }

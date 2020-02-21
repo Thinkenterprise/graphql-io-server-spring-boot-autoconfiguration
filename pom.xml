@@ -2,11 +2,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.graphqlio</groupId>
 	<artifactId>graphql-io-server-spring-boot-autoconfiguration</artifactId>
 	<version>0.0.9</version>
+	<packaging>jar</packaging>
 	<name>graphql-io-server-spring-boot-autoconfiguration</name>
+
+	<url>http://graphqlio.com</url>
 	<description>graphql-io-server-spring-boot-autoconfiguration</description>
+
+	<developers>
+		<developer>
+			<name>Michael Schäfer</name>
+			<email>michael.schaefer@graphqlio.com</email>
+			<url>http://graphqlio.com</url>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+			<distribution>repo</distribution>
+			<comments>See "https://en.wikipedia.org/wiki/MIT_License"</comments>
+		</license>
+	</licenses>
 
 	<dependencyManagement>
 		<dependencies>
@@ -63,7 +84,117 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.plugins</groupId>
+				<artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.7</version>
+				<extensions>true</extensions>
+				<configuration>
+					<serverId>ossrh</serverId>
+					<nexusUrl>https://oss.sonatype.org/</nexusUrl>
+					<autoReleaseAfterClose>false</autoReleaseAfterClose>
+				</configuration>
+			</plugin>
+			<!--
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.1.0</version>
+				<configuration>
+					<configLocation>google-checks.xml</configLocation>
+					<encoding>UTF-8</encoding>
+					<consoleOutput>true</consoleOutput>
+					<failsOnError>false</failsOnError>
+					<linkXRef>false</linkXRef>
+				</configuration>
+				<executions>
+					<execution>
+						<id>validate</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			-->
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-repo</id>
+			<name>Spring Repository</name>
+			<url>http://repo.spring.io/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+	</repositories>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+		<repository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+		</repository>
+	</distributionManagement>
+
+	<scm>
+		<connection>scm:git:git@github.com:Thinkenterprise/graphql-io-server-spring-boot-autoconfiguration.git</connection>
+		<developerConnection>scm:git:git@github.com:Thinkenterprise/graphql-io-server-spring-boot-autoconfiguration.git</developerConnection>
+		<url>https://github.com/Thinkenterprise/graphql-io-server-spring-boot-autoconfiguration</url>
+	</scm>
 
 </project>

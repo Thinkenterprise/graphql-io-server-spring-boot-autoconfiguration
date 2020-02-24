@@ -1,0 +1,12 @@
+1. POM Header fehlt 
+2. POM Kotlin Property wird nicht benötigt 
+3. POM spring-boot-maven-plugin keine Version angeben 
+4. >maven-compiler-plugin keine Version angeben 
+5. POM Dependency fehlt 
+       <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+6. Github Projekt Dokumentation fehlt 
+7. Source Code Documentation
